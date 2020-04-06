@@ -23,13 +23,17 @@ public class StudentsController {
 	private Map<Integer, Student> students = new HashMap<>();
 
 	private AtomicInteger idCounter = new AtomicInteger();
-	
+
 	@Autowired
 	private StudentService studentService;
 
 	@GetMapping
-	public List<Student> getStudents() {
-		return new LinkedList<Student>(students.values());
+	public List<Student> getStudents(
+			final @RequestParam(name = "firstName", required = false) String firstName) {
+		if (firstName == null) {
+			return studentService.findAll();
+		}
+		return studentService.getAllByFirstName(firstName);
 	}
 
 	@GetMapping(path = "/{id}")
@@ -40,11 +44,7 @@ public class StudentsController {
 	@PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
 	public Student createStudent(final @RequestBody Student student) {
 
-		System.out.println(studentService.createStudent(student));
-		
-		student.setId(idCounter.incrementAndGet());
-		students.put(student.getId(), student);
-		return student;
+		return studentService.createStudent(student);
 	}
 
 	@DeleteMapping(path = "/{id}")

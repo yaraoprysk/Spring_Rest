@@ -5,10 +5,11 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import ua.lviv.iot.spring.first.rest.model.Student;
+import ua.lviv.iot.spring.first.rest.model.Subject;
 
 @Repository
-public interface StudentRepository extends JpaRepository<Student, Integer> {
+public interface SubjectRepository extends JpaRepository<Subject, Integer>{
 
-	List<Student> findAllByFirstName(String firstName);
+	List<Subject> findAllBySubjectName();
+
 }
