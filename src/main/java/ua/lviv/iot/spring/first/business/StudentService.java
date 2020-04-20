@@ -18,18 +18,9 @@ public class StudentService {
 		return studentRepository.save(student);
 	}
 
-	public Student updateStudent(Student student, String id) {
-		// studentRepository.
-		// "; delete from students;"
-		String query = "select * from students where id = :id";
-		String finalQuery = query + id;
-		return null;
-	}
-
 	public List<Student> findAll() {
 		return studentRepository.findAll();
 	}
-
 
 	public List<Student> getAllByFirstName(String firstName) {
 		return studentRepository.findAllByFirstName(firstName);
